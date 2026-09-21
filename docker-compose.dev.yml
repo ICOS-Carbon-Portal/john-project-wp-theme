@@ -1,0 +1,42 @@
+# Local development stack.
+#
+# Image tags deliberately match production (roles/icos.wordpress/defaults/main.yml
+# in the infrastructure repo) so PHP and WordPress versions line up.
+#
+#   docker compose -f docker-compose.dev.yml up -d
+#   open http://localhost:8080
+#
+# The repo is mounted as wp-content/themes/john-project - the directory name the
+# theme is deployed under in production, which is why it differs from the repo
+# name. Activate "JOHN Project" under Appearance > Themes.
+
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: wordpress
+    volumes:
+      - db:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:7-php8.4-apache
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DEBUG: "1"
+    volumes:
+      - wp:/var/www/html
+      - ./:/var/www/html/wp-content/themes/john-project
+
+volumes:
+  db:
+  wp:
