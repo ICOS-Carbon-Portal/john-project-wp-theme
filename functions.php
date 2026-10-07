@@ -19,6 +19,23 @@ function john_project_enqueue_styles() {
 	);
 }
 
+add_action( 'after_setup_theme', 'john_project_add_editor_styles' );
+function john_project_add_editor_styles() {
+	add_editor_style( 'style.css' );
+}
+
+// Block styles
+add_action( 'init', 'john_project_register_block_styles' );
+function john_project_register_block_styles() {
+	register_block_style(
+		'core/list',
+		[
+			'name'  => 'link-list',
+			'label' => __( 'Link list', 'john-project' ),
+		]
+	);
+}
+
 // Event post type
 //
 // Event times are stored as site-local "Y-m-d\TH:i" strings (the value format

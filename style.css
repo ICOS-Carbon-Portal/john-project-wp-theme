@@ -24,3 +24,37 @@ Text Domain:  john-project
 .john-hero .wp-block-cover__inner-container {
 	text-shadow: 0 1px 3px rgb(0 0 0 / 60%);
 }
+
+.wp-block-list.is-style-link-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.is-style-link-list li {
+	border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+}
+
+.is-style-link-list a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.6em 0.5em;
+	text-decoration: none;
+}
+
+.is-style-link-list a::after {
+	content: "\2192";
+	display: grid;
+	flex-shrink: 0;
+	place-items: center;
+	width: 1.6em;
+	height: 1.6em;
+	border: 1px solid currentColor;
+	border-radius: 50%;
+}
+
+.is-style-link-list a:hover,
+.is-style-link-list a:focus-visible {
+	background-color: color-mix(in srgb, currentColor 8%, transparent);
+}

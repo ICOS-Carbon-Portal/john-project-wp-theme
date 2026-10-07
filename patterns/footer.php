@@ -9,12 +9,14 @@
 <div class="wp-block-group alignfull has-white-color has-dark-background-color has-text-color has-background has-link-color" style="padding-top:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40)"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical"}} -->
 <div class="wp-block-group"><!-- wp:pattern {"slug":"john-project/logo-white"} /-->
+<?php /* Social links are hidden until the project's accounts exist.
 
 <!-- wp:social-links -->
 <ul class="wp-block-social-links"><!-- wp:social-link {"url":"#","service":"linkedin"} /-->
 
 <!-- wp:social-link {"url":"#","service":"bluesky"} /--></ul>
-<!-- /wp:social-links --></div>
+<!-- /wp:social-links -->
+*/ ?></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
