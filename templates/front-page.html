@@ -1,0 +1,75 @@
+<!-- wp:pattern {"slug":"john-project/hero-home"} /-->
+
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"},"blockGap":"var:preset|spacing|50"}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group" style="padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)"><!-- wp:post-content {"align":"full","layout":{"type":"constrained"}} /-->
+
+<!-- wp:columns {"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+<div class="wp-block-columns"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading -->
+<h2 class="wp-block-heading">Latest news</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":1,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false}} -->
+<div class="wp-block-query"><!-- wp:post-template {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group"><!-- wp:post-date /-->
+
+<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"medium"} /-->
+
+<!-- wp:post-excerpt {"excerptLength":25} /--></div>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>No news yet.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline","metadata":{"bindings":{"url":{"source":"john-project/links","args":{"key":"news"}}}}} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button">All news</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:heading -->
+<h2 class="wp-block-heading">Upcoming events</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":2,"query":{"perPage":3,"pages":0,"offset":0,"postType":"event","order":"asc","orderBy":"date","inherit":false},"className":"john-upcoming-events"} -->
+<div class="wp-block-query john-upcoming-events"><!-- wp:post-template {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|10"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+<div class="wp-block-group"><!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"john-project/event","args":{"key":"when"}}}},"textColor":"secondary","fontSize":"small"} -->
+<p class="has-secondary-color has-text-color has-small-font-size"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"medium"} /-->
+
+<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"john-project/event","args":{"key":"location"}}}},"fontSize":"small"} -->
+<p class="has-small-font-size"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:post-excerpt {"excerptLength":25} /--></div>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>No upcoming events.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-outline","metadata":{"bindings":{"url":{"source":"john-project/links","args":{"key":"events"}}}}} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button">All events</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

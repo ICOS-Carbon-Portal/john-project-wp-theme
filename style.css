@@ -3,7 +3,7 @@ Theme Name:   JOHN Project
 Description:  Child theme for the JOHN Project website
 Author:       ICOS Carbon Portal
 Template:     twentytwentyfour
-Version:      0.1.0
+Version:      0.2.0
 License:      GNU General Public License v2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  john-project
@@ -15,3 +15,12 @@ Text Domain:  john-project
  * element styles - so the block editor shows the same result as the front end.
  * Use this file for what theme.json cannot reach.
  */
+
+/* Shown when the page has no featured image; a featured image covers it. */
+.john-hero {
+	background: var(--wp--preset--color--dark) url("assets/images/hero-default.webp") center / cover no-repeat;
+}
+
+.john-hero .wp-block-cover__inner-container {
+	text-shadow: 0 1px 3px rgb(0 0 0 / 60%);
+}
