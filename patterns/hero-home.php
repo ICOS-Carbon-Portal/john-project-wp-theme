@@ -14,7 +14,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"fontSize":"medium"} -->
-<p class="has-medium-font-size">JOHN is a Horizon Europe funded project (2026-2030) that will assess and improve the global greenhouse gas observing system, explore emerging technologies, and develop practical priorities for future investment and monitoring.</p>
+<p class="has-medium-font-size">JOHN is a Horizon Europe funded project (2026-2030) that will assess and improve the global greenhouse gas observing system, explore emerging technologies, and develop priorities for future investment and monitoring.</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div></div>
 <!-- /wp:cover -->
