@@ -74,6 +74,7 @@ Text Domain:  john-project
 }
 
 .john-main-nav .wp-block-navigation__submenu-container {
+	overflow: hidden; /* keeps the items' square backgrounds off the rounded corners */
 	border: 1px solid var(--wp--preset--color--border);
 	border-radius: 0 0 4px 4px;
 	font-size: 1.125rem;
@@ -636,6 +637,16 @@ Text Domain:  john-project
 .wp-block-social-links.john-footer-social .wp-block-social-link-anchor svg {
 	width: 20px;
 	height: 20px;
+}
+
+/* Hover like the other footer links (underline), not core's enlarge effect. */
+.wp-block-social-links.john-footer-social .wp-block-social-link:hover {
+	transform: none;
+}
+
+.wp-block-social-links.john-footer-social .wp-block-social-link-anchor:hover .wp-block-social-link-label,
+.wp-block-social-links.john-footer-social .wp-block-social-link-anchor:focus-visible .wp-block-social-link-label {
+	text-decoration: underline;
 }
 
 .wp-block-social-links.john-footer-social .wp-social-link span.wp-block-social-link-label {
