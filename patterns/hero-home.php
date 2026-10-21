@@ -33,7 +33,7 @@
 
 <!-- wp:column {"verticalAlignment":"top","width":"42.33%"} -->
 <div class="wp-block-column is-vertically-aligned-top" style="flex-basis:42.33%"><!-- wp:image {"aspectRatio":"157/134","scale":"cover","sizeSlug":"full","linkDestination":"none","className":"john-home-hero__image"} -->
-<figure class="wp-block-image size-full john-home-hero__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/hero-home.webp' ) ); ?>" alt="A measurement mast above pine forest at an ICOS station" style="aspect-ratio:157/134;object-fit:cover"/></figure>
+<figure class="wp-block-image size-full john-home-hero__image"><img src="<?php echo esc_url( add_query_arg( 'ver', filemtime( get_theme_file_path( 'assets/images/hero-home.webp' ) ), get_theme_file_uri( 'assets/images/hero-home.webp' ) ) ); ?>" alt="A measurement mast above pine forest at an ICOS station" style="aspect-ratio:157/134;object-fit:cover"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>

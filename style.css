@@ -217,10 +217,10 @@ Text Domain:  john-project
 }
 
 @media (min-width: 782px) {
-	/* Above 1440px the photo keeps the design's height and widens to show more of
-	   itself, up to its own 3:2 shape; wider windows get white space after it. */
+	/* The photo always runs to the window edge. Above 1440px it keeps the design's
+	   height, so wider windows crop it top and bottom instead of making it taller. */
 	.john-home-hero__image {
-		margin-right: calc(-1 * min(max(var(--wp--style--root--padding-right), (100vw - var(--wp--style--global--wide-size)) / 2), 296px));
+		margin-right: calc(-1 * max(var(--wp--style--root--padding-right), (100vw - var(--wp--style--global--wide-size)) / 2));
 	}
 
 	.john-home-hero__image img {
