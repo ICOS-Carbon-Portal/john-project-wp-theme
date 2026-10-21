@@ -1,0 +1,27 @@
+<!-- wp:group {"className":"john-related","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"layout":{"type":"default"}} -->
+<div class="wp-block-group john-related" style="margin-top:var(--wp--preset--spacing--40)"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
+<p class="is-style-eyebrow">Related news</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:query {"queryId":20,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":false,"excludeCurrent":true},"className":"john-news-and-events"} -->
+<div class="wp-block-query john-news-and-events"><!-- wp:post-template {"className":"john-related__list"} -->
+<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"john-project/post","args":{"key":"date"}}}},"textColor":"secondary","fontSize":"x-small"} -->
+<p class="has-secondary-color has-text-color has-x-small-font-size"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:post-title {"level":3,"isLink":true,"className":"john-related__title"} /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">No other news or events yet.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button {"className":"is-style-text-link","metadata":{"bindings":{"url":{"source":"john-project/links","args":{"key":"news-and-events"}}}}} -->
+<div class="wp-block-button is-style-text-link"><a class="wp-block-button__link wp-element-button">All news &amp; events &rarr;</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:group -->

@@ -3,7 +3,7 @@ Theme Name:   JOHN Project
 Description:  Child theme for the JOHN Project website
 Author:       ICOS Carbon Portal
 Template:     twentytwentyfour
-Version:      0.2.0
+Version:      0.4.0
 License:      GNU General Public License v2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  john-project
@@ -16,14 +16,667 @@ Text Domain:  john-project
  * Use this file for what theme.json cannot reach.
  */
 
-/* Shown when the page has no featured image; a featured image covers it. */
-.john-hero {
-	background: var(--wp--preset--color--dark) url("assets/images/hero-default.webp") center / cover no-repeat;
+.wp-site-blocks > main,
+.wp-site-blocks > footer {
+	margin-block-start: 0;
 }
 
-.john-hero .wp-block-cover__inner-container {
-	text-shadow: 0 1px 3px rgb(0 0 0 / 60%);
+/* Header and main navigation */
+
+.john-header > .alignwide {
+	min-height: 95px;
 }
+
+.john-header .john-logo {
+	margin: 0.75rem 0;
+}
+
+@media (max-width: 599px) {
+	.john-header > .alignwide {
+		min-height: 72px;
+	}
+
+	.john-header .john-logo img {
+		width: 160px !important;
+	}
+}
+
+.john-main-nav .wp-block-navigation__container > .wp-block-navigation-item {
+	border-bottom: 4px solid transparent;
+}
+
+/* Items fill the 95px inside the header border: 32 + 30 + 29 + the 4px underline. */
+.john-main-nav .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content {
+	padding-block: 32px 29px;
+	line-height: 30px;
+}
+
+.john-main-nav .wp-block-navigation-submenu__toggle[aria-expanded="true"] + .wp-block-navigation__submenu-icon > svg,
+.john-main-nav .wp-block-navigation-submenu__toggle[aria-expanded="true"] > svg {
+	transform: none;
+}
+
+/* The parent theme outlines anything focused, including after a mouse click;
+   keep the outline for keyboard focus only. */
+.john-main-nav .wp-block-navigation-submenu__toggle:focus:not(:focus-visible) {
+	outline: none;
+}
+
+.john-main-nav .wp-block-navigation__container > .current-menu-item,
+.john-main-nav .wp-block-navigation__container > .current-menu-ancestor {
+	border-bottom-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary);
+}
+
+.john-main-nav .wp-block-navigation__container > .current-menu-item > .wp-block-navigation-item__content,
+.john-main-nav .wp-block-navigation__container > .current-menu-ancestor > .wp-block-navigation-item__content {
+	color: inherit;
+}
+
+.john-main-nav .wp-block-navigation__submenu-container {
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 0 0 4px 4px;
+	font-size: 1.125rem;
+}
+
+/* Open dropdowns from the header line, with the dropdown text lined up under the
+   item text, rather than right-aligned as core does for a right-justified menu. */
+.wp-block-navigation.john-main-nav.items-justified-right .wp-block-navigation__container .has-child > .wp-block-navigation__submenu-container {
+	top: calc(100% + 4px); /* below the item's 4px underline border, over the header's 1px line */
+	right: auto;
+	left: -1rem;
+}
+
+.john-main-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 0.5rem 1rem;
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__container > .wp-block-navigation-item {
+	border-bottom: 0;
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content {
+	padding-block: 0.25rem;
+}
+
+.john-main-nav .wp-block-navigation__responsive-container.is-menu-open {
+	padding: var(--wp--preset--spacing--30) var(--wp--style--root--padding-right) var(--wp--preset--spacing--30) var(--wp--style--root--padding-left);
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__responsive-container-content,
+.john-main-nav .is-menu-open .wp-block-navigation__container,
+.john-main-nav .is-menu-open .wp-block-navigation-item,
+.john-main-nav .is-menu-open .wp-block-navigation__submenu-container {
+	align-items: flex-start !important;
+	text-align: left;
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__container {
+	gap: 1.25rem;
+	width: 100%;
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__submenu-container {
+	gap: 0;
+	padding: 0.25rem 0 0 !important;
+	border: 0;
+	font-size: 1.125rem;
+}
+
+.john-main-nav .is-menu-open .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 0.3rem 0 0.3rem 1rem;
+}
+
+/* Between 600px and 1023px the full menu doesn't fit beside the logo, so keep
+   the menu button that core only shows below 600px. */
+@media (min-width: 600px) and (max-width: 1023px) {
+	.john-main-nav .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
+
+	.john-main-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+}
+
+.wp-block-social-links.john-header-social {
+	align-self: center;
+	padding: 0.25rem 0 0.25rem 2.5rem;
+	border-left: 1px solid var(--wp--preset--color--border);
+}
+
+/* Block styles: Eyebrow (paragraph), Text link (button), Wave (separator) */
+
+.is-style-eyebrow,
+.john-section-nav__title,
+.john-see-also__eyebrow,
+.john-footer-heading {
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: 1.125rem;
+	letter-spacing: 0.055em;
+	line-height: 1.4;
+	text-transform: uppercase;
+}
+
+.is-style-eyebrow {
+	margin-bottom: 0.25rem;
+	color: var(--wp--preset--color--primary);
+}
+
+.john-intro {
+	font-size: 1.25rem;
+	line-height: 1.5;
+}
+
+.wp-block-button.is-style-text-link .wp-block-button__link {
+	padding: 0;
+	border-radius: 0;
+	background: none;
+	color: var(--wp--preset--color--primary);
+}
+
+.wp-block-button.is-style-text-link .wp-block-button__link:hover,
+.wp-block-button.is-style-text-link .wp-block-button__link:focus-visible {
+	background: none;
+	color: var(--wp--preset--color--primary);
+	text-decoration: underline;
+}
+
+.wp-block-separator.is-style-wave.is-style-wave {
+	width: 72px;
+	height: 22px;
+	margin-left: 0;
+	border: 0;
+	background-color: var(--wp--preset--color--accent);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 8.29 55.24 14.56'%3E%3Cpath d='M182.88,18.47c5.22.35,8.43,5.72,14.07,3.17,2.13-.96,3.51-2.69,5.95-3.08,2.6-.42,4.56.51,6.67,1.85s4.07,2.25,6.67,1.85c2.44-.37,3.83-2.12,5.95-3.08,5.59-2.52,8.89,2.82,14.08,3.17.13,0,.86-9.67.85-9.67-5.22-.35-8.44-5.72-14.08-3.17-2.13.96-3.52,2.69-5.95,3.08-2.6.42-4.56-.51-6.67-1.85s-4.07-2.25-6.67-1.85c-2.44.37-3.83,2.12-5.95,3.08-5.59,2.52-8.88-2.82-14.07-3.17-.13,0-.86,9.67-.85,9.67h0Z'/%3E%3C/svg%3E") left center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 8.29 55.24 14.56'%3E%3Cpath d='M182.88,18.47c5.22.35,8.43,5.72,14.07,3.17,2.13-.96,3.51-2.69,5.95-3.08,2.6-.42,4.56.51,6.67,1.85s4.07,2.25,6.67,1.85c2.44-.37,3.83-2.12,5.95-3.08,5.59-2.52,8.89,2.82,14.08,3.17.13,0,.86-9.67.85-9.67-5.22-.35-8.44-5.72-14.08-3.17-2.13.96-3.52,2.69-5.95,3.08-2.6.42-4.56-.51-6.67-1.85s-4.07-2.25-6.67-1.85c-2.44.37-3.83,2.12-5.95,3.08-5.59,2.52-8.88-2.82-14.07-3.17-.13,0-.86,9.67-.85,9.67h0Z'/%3E%3C/svg%3E") left center / contain no-repeat;
+	opacity: 1;
+}
+
+/* The three wave shapes from the logo, chosen by the separator's colour. */
+.wp-block-separator.is-style-wave.has-accent-2-background-color {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 22.14 55.25 16.59'%3E%3Cpath d='M182.88,32.35c5.25.45,7.72,8.42,13.65,5.04,2.14-1.22,3.21-3.75,5.58-4.66,3.1-1.19,5.38.48,7.46,2.54s3.98,3.52,6.97,2.68c2.55-.72,3.61-3.17,5.7-4.54,6.08-3.97,8.63,4.31,14.03,4.77.08,0,.91-9.66.85-9.67-5.25-.45-7.72-8.42-13.66-5.04-2.14,1.22-3.21,3.75-5.58,4.66-3.1,1.19-5.38-.48-7.46-2.54s-3.98-3.52-6.97-2.68c-2.55.72-3.61,3.17-5.7,4.54-6.08,3.97-8.62-4.31-14.02-4.77-.08,0-.91,9.66-.85,9.67h0Z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 22.14 55.25 16.59'%3E%3Cpath d='M182.88,32.35c5.25.45,7.72,8.42,13.65,5.04,2.14-1.22,3.21-3.75,5.58-4.66,3.1-1.19,5.38.48,7.46,2.54s3.98,3.52,6.97,2.68c2.55-.72,3.61-3.17,5.7-4.54,6.08-3.97,8.63,4.31,14.03,4.77.08,0,.91-9.66.85-9.67-5.25-.45-7.72-8.42-13.66-5.04-2.14,1.22-3.21,3.75-5.58,4.66-3.1,1.19-5.38-.48-7.46-2.54s-3.98-3.52-6.97-2.68c-2.55.72-3.61,3.17-5.7,4.54-6.08,3.97-8.62-4.31-14.02-4.77-.08,0-.91,9.66-.85,9.67h0Z'/%3E%3C/svg%3E");
+}
+
+.wp-block-separator.is-style-wave.has-info-background-color {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 35.98 55.26 18.58'%3E%3Cpath d='M182.88,46.22c5.34.53,7.45,11.31,13.67,6.68,2.3-1.71,3.04-5.13,5.81-6.3,3.32-1.4,5.45,1.12,7.21,3.5s3.57,4.67,6.78,3.64c2.96-.95,3.71-4.31,5.91-6.16,6.3-5.32,8.62,5.87,14.02,6.4.03,0,.96-9.66.85-9.67-5.34-.53-7.46-11.31-13.67-6.68-2.3,1.71-3.04,5.13-5.81,6.3-3.32,1.4-5.45-1.12-7.21-3.5s-3.57-4.67-6.78-3.64c-2.96.95-3.71,4.31-5.91,6.16-6.3,5.32-8.62-5.87-14.01-6.4-.03,0-.96,9.66-.85,9.67h0Z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='182.38 35.98 55.26 18.58'%3E%3Cpath d='M182.88,46.22c5.34.53,7.45,11.31,13.67,6.68,2.3-1.71,3.04-5.13,5.81-6.3,3.32-1.4,5.45,1.12,7.21,3.5s3.57,4.67,6.78,3.64c2.96-.95,3.71-4.31,5.91-6.16,6.3-5.32,8.62,5.87,14.02,6.4.03,0,.96-9.66.85-9.67-5.34-.53-7.46-11.31-13.67-6.68-2.3,1.71-3.04,5.13-5.81,6.3-3.32,1.4-5.45-1.12-7.21-3.5s-3.57-4.67-6.78-3.64c-2.96.95-3.71,4.31-5.91,6.16-6.3,5.32-8.62-5.87-14.01-6.4-.03,0-.96,9.66-.85,9.67h0Z'/%3E%3C/svg%3E");
+}
+
+/* Home: hero photo running to the window edge, and the wave into the green band */
+
+.john-home-hero h1 {
+	letter-spacing: -0.01em;
+}
+
+.john-home-hero {
+	position: relative;
+	z-index: 1;
+	overflow-x: clip;
+}
+
+@media (min-width: 782px) {
+	/* Above 1440px the photo keeps the design's height and widens to show more of
+	   itself, up to its own 3:2 shape; wider windows get white space after it. */
+	.john-home-hero__image {
+		margin-right: calc(-1 * min(max(var(--wp--style--root--padding-right), (100vw - var(--wp--style--global--wide-size)) / 2), 296px));
+	}
+
+	.john-home-hero__image img {
+		width: 100%;
+		max-height: 536px;
+		border-radius: 0;
+	}
+}
+
+.john-wave-band {
+	position: relative;
+}
+
+.john-wave-band::before {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: calc(100% - 1px);
+	left: 0;
+	height: clamp(48px, 7.7vw, 120px);
+	background: inherit;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 111' preserveAspectRatio='none'%3E%3Cpath d='M0 3 C3 3.5 13 4.7 20 6 C27 7.3 33 9.0 40 11 C47 13.0 53 15.5 60 18 C67 20.5 73 23.2 80 26 C87 28.8 93 31.8 100 35 C107 38.2 113 41.7 120 45 C127 48.3 133 51.5 140 55 C147 58.5 153 62.5 160 66 C167 69.5 173 72.8 180 76 C187 79.2 193 82.2 200 85 C207 87.8 213 90.5 220 93 C227 95.5 233 98.2 240 100 C247 101.8 253 102.8 260 104 C267 105.2 273 106.5 280 107 C287 107.5 293 107.2 300 107 C307 106.8 313 106.8 320 106 C327 105.2 333 103.8 340 102 C347 100.2 353 97.5 360 95 C367 92.5 373 90.2 380 87 C387 83.8 393 79.8 400 76 C407 72.2 413 68.3 420 64 C427 59.7 433 54.5 440 50 C447 45.5 453 41.2 460 37 C467 32.8 473 28.7 480 25 C487 21.3 493 17.7 500 15 C507 12.3 513 10.8 520 9 C527 7.2 533 5.2 540 4 C547 2.8 553 2.3 560 2 C567 1.7 573 1.7 580 2 C587 2.3 593 3.2 600 4 C607 4.8 613 5.5 620 7 C627 8.5 633 10.7 640 13 C647 15.3 653 18.0 660 21 C667 24.0 673 27.5 680 31 C687 34.5 693 38.2 700 42 C707 45.8 713 50.0 720 54 C727 58.0 733 62.3 740 66 C747 69.7 753 72.3 760 76 C767 79.7 773 84.7 780 88 C787 91.3 793 93.7 800 96 C807 98.3 813 100.3 820 102 C827 103.7 833 104.8 840 106 C847 107.2 853 108.5 860 109 C867 109.5 873 109.3 880 109 C887 108.7 893 108.0 900 107 C907 106.0 913 105.0 920 103 C927 101.0 933 97.7 940 95 C947 92.3 953 90.2 960 87 C967 83.8 973 80.0 980 76 C987 72.0 993 67.5 1000 63 C1007 58.5 1013 53.5 1020 49 C1027 44.5 1033 40.0 1040 36 C1047 32.0 1053 28.5 1060 25 C1067 21.5 1073 17.7 1080 15 C1087 12.3 1093 10.8 1100 9 C1107 7.2 1113 5.2 1120 4 C1127 2.8 1133 2.3 1140 2 C1147 1.7 1153 1.7 1160 2 C1167 2.3 1173 3.2 1180 4 C1187 4.8 1193 5.5 1200 7 C1207 8.5 1213 10.3 1220 13 C1227 15.7 1233 19.8 1240 23 C1247 26.2 1253 28.8 1260 32 C1267 35.2 1273 38.5 1280 42 C1287 45.5 1293 49.5 1300 53 C1307 56.5 1313 59.5 1320 63 C1327 66.5 1333 70.7 1340 74 C1347 77.3 1353 80.2 1360 83 C1367 85.8 1373 88.5 1380 91 C1387 93.5 1393 96.0 1400 98 C1407 100.0 1413 101.7 1420 103 C1427 104.3 1437 105.5 1440 106 L1440 111 L0 111 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 111' preserveAspectRatio='none'%3E%3Cpath d='M0 3 C3 3.5 13 4.7 20 6 C27 7.3 33 9.0 40 11 C47 13.0 53 15.5 60 18 C67 20.5 73 23.2 80 26 C87 28.8 93 31.8 100 35 C107 38.2 113 41.7 120 45 C127 48.3 133 51.5 140 55 C147 58.5 153 62.5 160 66 C167 69.5 173 72.8 180 76 C187 79.2 193 82.2 200 85 C207 87.8 213 90.5 220 93 C227 95.5 233 98.2 240 100 C247 101.8 253 102.8 260 104 C267 105.2 273 106.5 280 107 C287 107.5 293 107.2 300 107 C307 106.8 313 106.8 320 106 C327 105.2 333 103.8 340 102 C347 100.2 353 97.5 360 95 C367 92.5 373 90.2 380 87 C387 83.8 393 79.8 400 76 C407 72.2 413 68.3 420 64 C427 59.7 433 54.5 440 50 C447 45.5 453 41.2 460 37 C467 32.8 473 28.7 480 25 C487 21.3 493 17.7 500 15 C507 12.3 513 10.8 520 9 C527 7.2 533 5.2 540 4 C547 2.8 553 2.3 560 2 C567 1.7 573 1.7 580 2 C587 2.3 593 3.2 600 4 C607 4.8 613 5.5 620 7 C627 8.5 633 10.7 640 13 C647 15.3 653 18.0 660 21 C667 24.0 673 27.5 680 31 C687 34.5 693 38.2 700 42 C707 45.8 713 50.0 720 54 C727 58.0 733 62.3 740 66 C747 69.7 753 72.3 760 76 C767 79.7 773 84.7 780 88 C787 91.3 793 93.7 800 96 C807 98.3 813 100.3 820 102 C827 103.7 833 104.8 840 106 C847 107.2 853 108.5 860 109 C867 109.5 873 109.3 880 109 C887 108.7 893 108.0 900 107 C907 106.0 913 105.0 920 103 C927 101.0 933 97.7 940 95 C947 92.3 953 90.2 960 87 C967 83.8 973 80.0 980 76 C987 72.0 993 67.5 1000 63 C1007 58.5 1013 53.5 1020 49 C1027 44.5 1033 40.0 1040 36 C1047 32.0 1053 28.5 1060 25 C1067 21.5 1073 17.7 1080 15 C1087 12.3 1093 10.8 1100 9 C1107 7.2 1113 5.2 1120 4 C1127 2.8 1133 2.3 1140 2 C1147 1.7 1153 1.7 1160 2 C1167 2.3 1173 3.2 1180 4 C1187 4.8 1193 5.5 1200 7 C1207 8.5 1213 10.3 1220 13 C1227 15.7 1233 19.8 1240 23 C1247 26.2 1253 28.8 1260 32 C1267 35.2 1273 38.5 1280 42 C1287 45.5 1293 49.5 1300 53 C1307 56.5 1313 59.5 1320 63 C1327 66.5 1333 70.7 1340 74 C1347 77.3 1353 80.2 1360 83 C1367 85.8 1373 88.5 1380 91 C1387 93.5 1393 96.0 1400 98 C1407 100.0 1413 101.7 1420 103 C1427 104.3 1437 105.5 1440 106 L1440 111 L0 111 Z'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+}
+
+.john-section-header {
+	margin-bottom: var(--wp--preset--spacing--30);
+}
+
+.john-section-header h2,
+.john-newsletter-band h2 {
+	margin: 0;
+}
+
+.john-newsletter-band__text {
+	max-width: 42.5rem;
+}
+
+/* Title band, cards and post details */
+
+.john-title-band .wp-block-breadcrumbs {
+	margin-bottom: 0.75rem;
+}
+
+.john-title-band h1 {
+	margin-top: 0.75rem;
+	margin-bottom: 0;
+}
+
+.john-title-band .wp-block-post-featured-image {
+	margin-top: 2rem;
+}
+
+.john-caption {
+	margin-top: 0.75rem;
+}
+
+.john-title-band p.has-large-font-size {
+	max-width: 800px;
+	line-height: 1.45;
+}
+
+.john-meta p,
+.john-event-details p {
+	margin: 0;
+}
+
+.john-pill {
+	padding: 0.1em 0.6em;
+	border-radius: 2px;
+	background: var(--wp--preset--color--info-light);
+	color: var(--wp--preset--color--dark);
+	font-size: var(--wp--preset--font-size--x-small);
+	line-height: 1.6;
+}
+
+.type-event .john-pill,
+.single-event .john-pill {
+	background: var(--wp--preset--color--accent-2);
+}
+
+.john-card .wp-block-post-featured-image {
+	margin-bottom: 0.75rem;
+}
+
+.john-card .wp-block-post-title {
+	margin-top: 0.5rem;
+	font-size: 1.25rem;
+	line-height: 1.3;
+}
+
+.john-card .wp-block-post-excerpt__excerpt {
+	margin: 0;
+}
+
+/* Tablet: cards become a single list with the image beside the text. */
+@media (min-width: 600px) and (max-width: 899px) {
+	.wp-block-post-template.john-card-grid {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+
+	.john-card {
+		display: grid;
+		grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+		column-gap: 1.5rem;
+		align-items: start;
+	}
+
+	.john-card > * {
+		grid-column: 2;
+		margin-block-start: 0;
+	}
+
+	.john-card > .wp-block-post-featured-image {
+		grid-column: 1;
+		grid-row: 1 / span 4;
+		margin-bottom: 0;
+	}
+
+	.john-card > * + * {
+		margin-block-start: 0.5rem;
+	}
+}
+
+.john-event-details__when {
+	font-weight: 600;
+}
+
+.wp-block-read-more:hover,
+.wp-block-read-more:focus-visible {
+	text-decoration: underline;
+}
+
+.john-section-heading {
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+.john-listing-intro:has(> *) {
+	max-width: 800px;
+	margin-bottom: 2.5rem;
+}
+
+/* Long-form content: a line of space between paragraphs, more above subheadings. */
+
+.john-with-sidebar__main .wp-block-post-content > * + * {
+	margin-block-start: 1.75rem;
+}
+
+.john-with-sidebar__main .wp-block-post-content > :is(h2, h3, h4) {
+	margin-block-start: 2.75rem;
+}
+
+.john-with-sidebar__main .wp-block-post-content > :is(h2, h3, h4) + * {
+	margin-block-start: 0.5rem;
+}
+
+/* Content beside a sidebar: stacked below 1024px, sticky above it when the
+   sidebar fits in the window (assets/js/sticky-sidebar.js sets the class). */
+
+@media (max-width: 1023px) {
+	.wp-block-columns.john-with-sidebar {
+		flex-wrap: wrap !important;
+	}
+
+	.wp-block-columns.john-with-sidebar > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
+
+@media (min-width: 1024px) {
+	.john-with-sidebar__sidebar.fits-in-window {
+		position: sticky;
+		top: calc(var(--wp-admin--admin-bar--height, 0px) + 32px);
+		align-self: flex-start;
+	}
+}
+
+/* Sidebars and cards: section navigation, "See also", newsletter, related news */
+
+.john-section-nav {
+	padding: 1.5rem 0 0.75rem;
+	border-radius: 4px;
+	background: var(--wp--preset--color--tint);
+}
+
+.john-section-nav__title {
+	margin: 0 1.5rem 0.5rem;
+	color: var(--wp--preset--color--primary);
+}
+
+.john-section-nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.john-section-nav a {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.8rem 1.5rem 0.8rem calc(1.5rem - 3px);
+	border-left: 3px solid transparent;
+	color: var(--wp--preset--color--dark);
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.5;
+	text-decoration: none;
+}
+
+.john-section-nav a::after {
+	content: "\203A";
+	font-size: 1.25rem;
+	line-height: 1;
+}
+
+.john-section-nav a:hover,
+.john-section-nav a:focus-visible {
+	background: var(--wp--preset--color--tint-2);
+}
+
+.john-section-nav a[aria-current] {
+	border-left-color: var(--wp--preset--color--primary);
+	background: var(--wp--preset--color--tint-2);
+	color: var(--wp--preset--color--primary);
+	font-size: 1.0625rem;
+	font-weight: 600;
+}
+
+.john-see-also-section {
+	padding-bottom: var(--wp--preset--spacing--50);
+}
+
+.john-see-also {
+	display: grid;
+	grid-template-columns: minmax(0, 40rem) auto;
+	justify-content: space-between;
+	column-gap: 2rem;
+	padding: 2.5rem 3rem;
+	border-radius: 4px;
+	background: var(--wp--preset--color--info-light);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.john-see-also > * {
+	grid-column: 1;
+	margin: 0;
+}
+
+.john-see-also > .john-see-also__link {
+	grid-column: 2;
+	grid-row: 1 / span 3;
+	align-self: start;
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: 1.25rem;
+}
+
+.john-see-also__link a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+
+.john-see-also__link a:hover,
+.john-see-also__link a:focus-visible {
+	text-decoration: underline;
+}
+
+.john-see-also__eyebrow {
+	margin-bottom: 0.5rem;
+	font-size: 1rem;
+}
+
+.john-see-also__title {
+	margin-bottom: 0.5rem;
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: var(--wp--preset--font-size--x-large);
+	font-weight: 800;
+	line-height: 1.2;
+}
+
+.john-see-also__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.john-see-also__title a:hover,
+.john-see-also__title a:focus-visible {
+	color: var(--wp--preset--color--primary);
+}
+
+@media (max-width: 599px) {
+	.john-see-also {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 0.75rem;
+		padding: 1.5rem;
+	}
+
+	.john-see-also > .john-see-also__link {
+		grid-column: 1;
+		grid-row: auto;
+	}
+}
+
+.john-share__label {
+	font-family: var(--wp--preset--font-family--heading);
+}
+
+.john-newsletter-card__title {
+	font-size: var(--wp--preset--font-size--large);
+}
+
+.john-related__list {
+	margin-top: 0.5rem;
+	border-top: 1px solid var(--wp--preset--color--border);
+}
+
+.john-related__list > li {
+	padding-block: 1rem;
+	border-bottom: 1px solid var(--wp--preset--color--border);
+}
+
+.john-related__list p {
+	margin: 0;
+}
+
+.john-related__title {
+	margin: 0.25rem 0 0;
+	font-size: 1.25rem;
+	line-height: 1.3;
+}
+
+.john-related .wp-block-buttons {
+	margin-top: 1.5rem;
+}
+
+/* Article footer: back link and share buttons */
+
+.john-article-footer {
+	padding-top: 1rem;
+	border-top: 1px solid var(--wp--preset--color--tint-2);
+}
+
+.john-share {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--wp--preset--color--secondary);
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.john-share__button {
+	display: inline-grid;
+	place-items: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+	border: 1px solid var(--wp--preset--color--tint-2);
+	border-radius: 50%;
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--primary);
+	cursor: pointer;
+}
+
+.john-share__button svg {
+	width: 1.1rem;
+	height: 1.1rem;
+	fill: currentColor;
+}
+
+.john-share__copy svg {
+	fill: none;
+}
+
+.john-share__button:hover,
+.john-share__button:focus-visible,
+.john-share__copy.is-copied {
+	background: var(--wp--preset--color--tint-2);
+}
+
+/* Footer */
+
+.john-footer a {
+	text-decoration: none;
+}
+
+.john-footer a:hover,
+.john-footer a:focus-visible {
+	text-decoration: underline;
+}
+
+.john-footer-heading {
+	margin-bottom: 0.75rem;
+}
+
+.john-footer-columns > .wp-block-column:first-child p {
+	max-width: 21rem;
+}
+
+.john-footer-links {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.john-footer-links li + li {
+	margin-top: 0.75rem;
+}
+
+.wp-block-social-links.john-footer-social .wp-block-social-link-anchor {
+	align-items: center;
+	gap: 0.625rem;
+	padding: 0;
+}
+
+.wp-block-social-links.john-footer-social .wp-block-social-link-anchor svg {
+	width: 20px;
+	height: 20px;
+}
+
+.wp-block-social-links.john-footer-social .wp-social-link span.wp-block-social-link-label {
+	margin-inline-start: 0;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.4;
+}
+
+.john-eu-emblem {
+	margin: 0 0 1rem;
+}
+
+.john-eu-emblem img {
+	border-radius: 0;
+}
+
+.wp-block-separator.john-footer-rule.john-footer-rule {
+	width: auto;
+	border: 0;
+	border-top: 1px solid rgb(255 255 255 / 60%);
+	opacity: 1;
+}
+
+.john-footer-legal {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1.75rem;
+}
+
+@media (min-width: 600px) and (max-width: 1149px) {
+	.wp-block-columns.john-footer-columns {
+		flex-wrap: wrap !important;
+		row-gap: 2.5rem;
+	}
+
+	.wp-block-columns.john-footer-columns > .wp-block-column {
+		flex-basis: calc(50% - 1.5rem) !important;
+	}
+}
+
+/* Link list (List block style) */
 
 .wp-block-list.is-style-link-list {
 	list-style: none;
