@@ -632,8 +632,8 @@ Text Domain:  john-project
 }
 
 .john-share__button svg {
-	width: 1.1rem;
-	height: 1.1rem;
+	width: 18px;
+	height: 18px;
 	fill: currentColor;
 }
 

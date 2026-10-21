@@ -553,7 +553,8 @@ function john_project_share_shortcode() {
 	$icon = static function ( $service ) {
 		return function_exists( 'block_core_social_link_get_icon' ) ? block_core_social_link_get_icon( $service ) : '';
 	};
-	$link_icon = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>';
+	// Shown at 18px, so a 24-unit stroke of 2.667 draws a whole 2px line.
+	$link_icon = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.667" stroke-linecap="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>';
 
 	$html  = '<div class="john-share"><span class="john-share__label">' . esc_html__( 'Share', 'john-project' ) . '</span>';
 	$html .= sprintf(
