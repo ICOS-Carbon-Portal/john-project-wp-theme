@@ -173,7 +173,7 @@ function john_project_page_url( $slug ) {
 // Event times are stored as site-local "Y-m-d\TH:i" strings (the value format
 // of a datetime-local input), so they sort and compare correctly as strings.
 const JOHN_PROJECT_EVENT_TIME_FORMAT = 'Y-m-d\TH:i';
-const JOHN_PROJECT_REWRITE_VERSION   = '1';
+const JOHN_PROJECT_REWRITE_VERSION   = '2';
 
 add_action( 'init', 'john_project_register_event_post_type' );
 function john_project_register_event_post_type() {
@@ -194,9 +194,9 @@ function john_project_register_event_post_type() {
 				'archives'           => __( 'Events', 'john-project' ),
 			],
 			'public'       => true,
-			'has_archive'  => 'events',
+			'has_archive'  => 'news-events/events',
 			'rewrite'      => [
-				'slug'       => 'events',
+				'slug'       => 'news-events/events',
 				'with_front' => false,
 			],
 			'show_in_rest' => true,

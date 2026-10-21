@@ -21,8 +21,10 @@ WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed.
   posts page (e.g. "News").
 - Build the menu in Appearance, Editor, Navigation. The header uses whichever
   menu exists; with none, it lists published pages.
-- Events have their own admin menu. Their archive is at `/events/`, so don't
-  create a page with the slug `events`.
+- Events have their own admin menu. Their archive is at
+  `/news-events/events/` (single events below it), so don't create a page
+  called "Events" under News & Events. The `news-events` part is fixed in the
+  theme and doesn't follow the page's slug.
 - Some links find pages by slug, so keep these slugs: `about` and `objectives`
   (home page buttons), `newsletter` (subscribe buttons and footer),
   `accessibility-statement` (footer). Until a page exists, its link points to
