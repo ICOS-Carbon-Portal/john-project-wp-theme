@@ -21,6 +21,17 @@ Text Domain:  john-project
 	margin-block-start: 0;
 }
 
+/* The parent theme draws a heavy outline on anything focused, even after a mouse
+   click. Show a lighter one, for keyboard focus only. */
+:where(.wp-site-blocks *:focus):not(:focus-visible) {
+	outline: none;
+}
+
+:where(.wp-site-blocks *:focus-visible) {
+	outline: 2px solid var(--wp--preset--color--info);
+	outline-offset: 2px;
+}
+
 /* Header and main navigation */
 
 .john-header > .alignwide {
@@ -56,11 +67,6 @@ Text Domain:  john-project
 	transform: none;
 }
 
-/* The parent theme outlines anything focused, including after a mouse click;
-   keep the outline for keyboard focus only. */
-.john-main-nav .wp-block-navigation-submenu__toggle:focus:not(:focus-visible) {
-	outline: none;
-}
 
 .john-main-nav .wp-block-navigation__container > .current-menu-item,
 .john-main-nav .wp-block-navigation__container > .current-menu-ancestor {
@@ -143,6 +149,39 @@ Text Domain:  john-project
 	.john-main-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
 		display: none;
 	}
+}
+
+/* Menu button: core's icon has 1.5px lines at fractional positions, which render
+   at uneven thicknesses on scaled screens. Borders snap to whole device pixels. */
+.john-main-nav .wp-block-navigation__responsive-container-open {
+	position: relative;
+	width: 24px;
+	height: 24px;
+}
+
+.john-main-nav .wp-block-navigation__responsive-container-open svg {
+	display: none;
+}
+
+.john-main-nav .wp-block-navigation__responsive-container-open::before,
+.john-main-nav .wp-block-navigation__responsive-container-open::after {
+	content: "";
+	position: absolute;
+	right: 3px;
+	left: 3px;
+	box-sizing: border-box;
+}
+
+.john-main-nav .wp-block-navigation__responsive-container-open::before {
+	top: 5px;
+	height: 14px;
+	border-top: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+}
+
+.john-main-nav .wp-block-navigation__responsive-container-open::after {
+	top: 11px;
+	border-top: 2px solid currentColor;
 }
 
 .wp-block-social-links.john-header-social {

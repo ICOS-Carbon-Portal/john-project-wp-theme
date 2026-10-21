@@ -12,7 +12,7 @@
 <!-- /wp:image -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"2.5rem"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group"><!-- wp:navigation {"className":"john-main-nav","overlayBackgroundColor":"white","overlayTextColor":"dark","style":{"spacing":{"blockGap":"2.625rem"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
+<div class="wp-block-group"><!-- wp:navigation {"icon":"menu","className":"john-main-nav","overlayBackgroundColor":"white","overlayTextColor":"dark","style":{"spacing":{"blockGap":"2.625rem"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
 <?php /* Social links are hidden until the project's accounts exist.
 
 <!-- wp:social-links {"iconColor":"dark","iconColorValue":"#414142","size":"has-small-icon-size","className":"is-style-logos-only john-header-social","style":{"spacing":{"blockGap":{"left":"0.75rem"}}}} -->
