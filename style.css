@@ -73,11 +73,16 @@ Text Domain:  john-project
 	color: inherit;
 }
 
-.john-main-nav .wp-block-navigation__submenu-container {
-	overflow: hidden; /* keeps the items' square backgrounds off the rounded corners */
+.wp-block-navigation.john-main-nav .has-child .wp-block-navigation__submenu-container {
 	border: 1px solid var(--wp--preset--color--border);
 	border-radius: 0 0 4px 4px;
 	font-size: 1.125rem;
+}
+
+/* The items have their own square white background, which would paint over the
+   box's rounded bottom corners; round the last one to match. */
+.wp-block-navigation.john-main-nav .has-child .wp-block-navigation__submenu-container > .wp-block-navigation-item:last-child {
+	border-radius: 0 0 3px 3px;
 }
 
 /* Open dropdowns from the header line, with the dropdown text lined up under the
@@ -144,6 +149,11 @@ Text Domain:  john-project
 	align-self: center;
 	padding: 0.25rem 0 0.25rem 2.5rem;
 	border-left: 1px solid var(--wp--preset--color--border);
+}
+
+.wp-element-button,
+.wp-block-button__link {
+	transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 
 /* Block styles: Eyebrow (paragraph), Text link (button), Wave (separator) */
