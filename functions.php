@@ -498,14 +498,28 @@ function john_project_remove_empty_bound_paragraph( $block_content, $block ) {
 	return $block_content;
 }
 
-// The design's LinkedIn icon is the plain "in", not core's "in" in a filled square.
-add_filter( 'render_block_core/social-link', 'john_project_linkedin_icon', 10, 2 );
-function john_project_linkedin_icon( $block_content, $block ) {
-	if ( 'linkedin' !== ( $block['attrs']['service'] ?? '' ) ) {
+// LinkedIn and Bluesky open in a new tab (the block's own setting would also
+// apply to the footer's newsletter link). The design's LinkedIn icon is the
+// plain "in", not core's "in" in a filled square.
+add_filter( 'render_block_core/social-link', 'john_project_social_link', 10, 2 );
+function john_project_social_link( $block_content, $block ) {
+	$service = $block['attrs']['service'] ?? '';
+	if ( ! in_array( $service, [ 'linkedin', 'bluesky' ], true ) ) {
 		return $block_content;
 	}
-	$icon = '<svg width="24" height="24" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><circle cx="1.75" cy="1.75" r="1.75"/><path d="M0 5h3.5v9H0zM5.5 5H9v1.3C9.6 5.4 10.6 4.8 12 4.8c1.6 0 2 1.1 2 3.2V14h-3.5V8.6c0-.9-.3-1.5-1.1-1.5S9 7.7 9 8.6V14H5.5z"/></svg>';
-	return preg_replace( '#<svg\b.*?</svg>#s', $icon, $block_content, 1 );
+
+	$tags = new WP_HTML_Tag_Processor( $block_content );
+	if ( $tags->next_tag( 'a' ) ) {
+		$tags->set_attribute( 'target', '_blank' );
+		$tags->set_attribute( 'rel', 'noopener' );
+	}
+	$block_content = $tags->get_updated_html();
+
+	if ( 'linkedin' === $service ) {
+		$icon          = '<svg width="24" height="24" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><circle cx="1.75" cy="1.75" r="1.75"/><path d="M0 5h3.5v9H0zM5.5 5H9v1.3C9.6 5.4 10.6 4.8 12 4.8c1.6 0 2 1.1 2 3.2V14h-3.5V8.6c0-.9-.3-1.5-1.1-1.5S9 7.7 9 8.6V14H5.5z"/></svg>';
+		$block_content = preg_replace( '#<svg\b.*?</svg>#s', $icon, $block_content, 1 );
+	}
+	return $block_content;
 }
 
 // Shortcodes for sidebar and sharing markup that blocks can't express
