@@ -28,6 +28,13 @@ function john_project_enqueue_scripts() {
 		filemtime( get_theme_file_path( 'assets/js/sticky-sidebar.js' ) ),
 		[ 'strategy' => 'defer' ]
 	);
+	wp_register_script(
+		'john-project-newsletter-form',
+		get_theme_file_uri( 'assets/js/newsletter-form.js' ),
+		[],
+		filemtime( get_theme_file_path( 'assets/js/newsletter-form.js' ) ),
+		[ 'strategy' => 'defer' ]
+	);
 }
 
 add_action( 'after_setup_theme', 'john_project_add_editor_styles' );
@@ -155,6 +162,12 @@ function john_project_save_see_also( $post_id ) {
 	$see_also_id = isset( $_POST['john_project_see_also'] ) ? absint( $_POST['john_project_see_also'] ) : 0;
 	john_project_update_or_delete_meta( $post_id, '_john_project_see_also', $see_also_id ? (string) $see_also_id : '' );
 }
+
+// The project's accounts, used by the header and footer, and the MailerLite
+// endpoint the newsletter form submits to.
+const JOHN_PROJECT_LINKEDIN_URL           = 'https://www.linkedin.com/company/john-project';
+const JOHN_PROJECT_BLUESKY_URL            = 'https://bsky.app/profile/john-project.bsky.social';
+const JOHN_PROJECT_NEWSLETTER_FORM_ACTION = 'https://assets.mailerlite.com/jsonp/2732854/forms/202014132116915617/subscribe';
 
 function john_project_page_url( $slug ) {
 	$pages = get_posts(
@@ -485,6 +498,16 @@ function john_project_remove_empty_bound_paragraph( $block_content, $block ) {
 	return $block_content;
 }
 
+// The design's LinkedIn icon is the plain "in", not core's "in" in a filled square.
+add_filter( 'render_block_core/social-link', 'john_project_linkedin_icon', 10, 2 );
+function john_project_linkedin_icon( $block_content, $block ) {
+	if ( 'linkedin' !== ( $block['attrs']['service'] ?? '' ) ) {
+		return $block_content;
+	}
+	$icon = '<svg width="24" height="24" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><circle cx="1.75" cy="1.75" r="1.75"/><path d="M0 5h3.5v9H0zM5.5 5H9v1.3C9.6 5.4 10.6 4.8 12 4.8c1.6 0 2 1.1 2 3.2V14h-3.5V8.6c0-.9-.3-1.5-1.1-1.5S9 7.7 9 8.6V14H5.5z"/></svg>';
+	return preg_replace( '#<svg\b.*?</svg>#s', $icon, $block_content, 1 );
+}
+
 // Shortcodes for sidebar and sharing markup that blocks can't express
 add_shortcode( 'john_section_nav', 'john_project_section_nav_shortcode' );
 function john_project_section_nav_shortcode() {
@@ -540,6 +563,27 @@ function john_project_see_also_shortcode() {
 		/* translators: %s: page title. */
 		esc_attr( sprintf( __( 'Read more: %s', 'john-project' ), get_the_title( $see_also ) ) ),
 		esc_html__( 'Read more', 'john-project' )
+	);
+}
+
+// Newsletter sign-up, posted straight to MailerLite. Without JavaScript the
+// browser shows MailerLite's raw JSON reply, but the sign-up still works.
+add_shortcode( 'john_newsletter_form', 'john_project_newsletter_form_shortcode' );
+function john_project_newsletter_form_shortcode() {
+	wp_enqueue_script( 'john-project-newsletter-form' );
+	static $form_count = 0;
+	$input_id = 'john-newsletter-email-' . ++$form_count;
+	// One line: the Shortcode block runs wpautop, which turns line breaks into <br> and <p>.
+	return sprintf(
+		'<form class="john-newsletter-form" action="%s" method="post" data-success="%s" data-error="%s"><label class="screen-reader-text" for="%s">%s</label><input type="email" id="%s" name="fields[email]" placeholder="%s" autocomplete="email" required><input type="hidden" name="ml-submit" value="1"><input type="hidden" name="anticsrf" value="true"><button type="submit" class="wp-element-button">%s</button><div class="john-newsletter-form__message" role="status"></div></form>',
+		esc_url( JOHN_PROJECT_NEWSLETTER_FORM_ACTION ),
+		esc_attr__( 'Thank you! Please check your email to confirm your subscription.', 'john-project' ),
+		esc_attr__( 'Sorry, something went wrong. Please try again.', 'john-project' ),
+		esc_attr( $input_id ),
+		esc_html__( 'Email address', 'john-project' ),
+		esc_attr( $input_id ),
+		esc_attr__( 'Your email address', 'john-project' ),
+		esc_html__( 'Subscribe', 'john-project' )
 	);
 }
 

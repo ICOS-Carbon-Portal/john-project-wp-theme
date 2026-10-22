@@ -186,8 +186,35 @@ Text Domain:  john-project
 
 .wp-block-social-links.john-header-social {
 	align-self: center;
-	padding: 0.25rem 0 0.25rem 2.5rem;
+	gap: 17px; /* 22px between the visible icons; the butterfly's box has 2-3px padding */
+	padding: 0.25rem 0 0.25rem 44px;
 	border-left: 1px solid var(--wp--preset--color--border);
+}
+
+/* Visible icon sizes from the design: LinkedIn 14px, Bluesky about 20px wide
+   (core's butterfly has padding inside its 24px box). */
+/* A bigger click target without moving the icons: padding cancelled by margin.
+   8px each side horizontally keeps the two targets from overlapping. */
+.wp-block-social-links.john-header-social .wp-block-social-link-anchor {
+	margin: -12px -8px;
+	padding: 12px 8px;
+}
+
+.wp-block-social-links.john-header-social .wp-social-link-linkedin svg {
+	width: 14px;
+	height: 14px;
+}
+
+.wp-block-social-links.john-header-social .wp-social-link-bluesky svg {
+	width: 24px;
+	height: 24px;
+}
+
+/* No room beside the logo and menu button on phones; the footer has them too. */
+@media (max-width: 599px) {
+	.wp-block-social-links.john-header-social {
+		display: none;
+	}
 }
 
 .wp-element-button,
@@ -307,6 +334,83 @@ Text Domain:  john-project
 
 .john-newsletter-band__text {
 	max-width: 42.5rem;
+}
+
+/* Newsletter form: 360px field and the Subscribe button, stacked on phones. */
+.john-newsletter-form {
+	display: grid;
+	grid-template-columns: minmax(0, 360px) max-content;
+	justify-content: start;
+	gap: 12px;
+	max-width: 100%;
+}
+
+.john-newsletter-form .screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.john-newsletter-form input[type="email"] {
+	box-sizing: border-box;
+	min-width: 0;
+	height: 50px;
+	padding: 0 1rem;
+	border: 1px solid var(--wp--preset--color--secondary);
+	border-radius: 4px;
+	background: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--dark);
+	font: inherit;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.john-newsletter-form input[type="email"]::placeholder {
+	color: var(--wp--preset--color--secondary);
+	opacity: 1;
+}
+
+.john-newsletter-form button {
+	border: 0;
+	cursor: pointer;
+}
+
+.john-newsletter-form button:disabled {
+	cursor: progress;
+	opacity: 0.7;
+}
+
+.john-newsletter-form__message {
+	grid-column: 1 / -1;
+	margin: 0;
+	font-size: var(--wp--preset--font-size--small);
+}
+
+.john-newsletter-form__message:empty,
+.john-newsletter-form > p:empty {
+	display: none; /* the Shortcode block's <p> wrapper ends up as an empty <p> inside the form */
+}
+
+.john-newsletter-form.has-error .john-newsletter-form__message {
+	color: #a4001d;
+}
+
+.john-newsletter-form.is-subscribed input,
+.john-newsletter-form.is-subscribed button {
+	display: none;
+}
+
+@media (max-width: 599px) {
+	.john-newsletter-form {
+		grid-template-columns: minmax(0, 1fr);
+		width: 100%;
+	}
+
+	.john-newsletter-form button {
+		justify-self: start;
+	}
 }
 
 /* Title band, cards and post details */

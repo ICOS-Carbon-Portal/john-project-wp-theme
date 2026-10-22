@@ -13,14 +13,12 @@
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"2.5rem"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 <div class="wp-block-group"><!-- wp:navigation {"icon":"menu","className":"john-main-nav","overlayBackgroundColor":"white","overlayTextColor":"dark","style":{"spacing":{"blockGap":"2.625rem"}},"layout":{"type":"flex","justifyContent":"right"}} /-->
-<?php /* Social links are hidden until the project's accounts exist.
 
-<!-- wp:social-links {"iconColor":"dark","iconColorValue":"#414142","size":"has-small-icon-size","className":"is-style-logos-only john-header-social","style":{"spacing":{"blockGap":{"left":"0.75rem"}}}} -->
-<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only john-header-social"><!-- wp:social-link {"url":"#","service":"linkedin"} /-->
+<!-- wp:social-links {"iconColor":"dark","iconColorValue":"#414141","size":"has-small-icon-size","className":"is-style-logos-only john-header-social","style":{"spacing":{"blockGap":{"left":"0.75rem"}}}} -->
+<ul class="wp-block-social-links has-small-icon-size has-icon-color is-style-logos-only john-header-social"><!-- wp:social-link {"url":"<?php echo esc_url( JOHN_PROJECT_LINKEDIN_URL ); ?>","service":"linkedin"} /-->
 
-<!-- wp:social-link {"url":"#","service":"bluesky"} /--></ul>
-<!-- /wp:social-links -->
-*/ ?></div>
+<!-- wp:social-link {"url":"<?php echo esc_url( JOHN_PROJECT_BLUESKY_URL ); ?>","service":"bluesky"} /--></ul>
+<!-- /wp:social-links --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

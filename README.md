@@ -26,9 +26,14 @@ WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed.
   called "Events" under News & Events. The `news-events` part is fixed in the
   theme and doesn't follow the page's slug.
 - Some links find pages by slug, so keep these slugs: `about` and `objectives`
-  (home page buttons), `newsletter` (subscribe buttons and footer),
-  `accessibility-statement` (footer). Until a page exists, its link points to
-  `#`. The footer's privacy link uses Settings, Privacy.
+  (home page buttons), `accessibility-statement` (footer). Until a page exists,
+  its link points to `#`. The footer's privacy link uses Settings, Privacy.
+- The LinkedIn and Bluesky addresses and the MailerLite sign-up endpoint are
+  constants at the top of the page helpers in `functions.php`.
+- The newsletter sign-up form is the `[john_newsletter_form]` shortcode. It's
+  on the home page and can be added to any page (e.g. Newsletter) with a
+  Shortcode block. Other "Subscribe" links go to the page with the slug
+  `newsletter`.
 - The footer's "Explore" list shows the pages with the slugs `about`,
   `objectives`, `results`, `news-events` and `newsletter`, in that order, when
   they exist and are published.

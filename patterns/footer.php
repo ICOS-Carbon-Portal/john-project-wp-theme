@@ -47,11 +47,11 @@ foreach ( [ 'about' => 'About', 'objectives' => 'Objectives', 'results' => 'Resu
 <!-- /wp:paragraph -->
 
 <!-- wp:social-links {"iconColor":"white","iconColorValue":"#FFFFFF","showLabels":true,"size":"has-small-icon-size","className":"is-style-logos-only john-footer-social","style":{"spacing":{"blockGap":{"top":"0.75rem"}}},"layout":{"type":"flex","orientation":"vertical"}} -->
-<ul class="wp-block-social-links has-small-icon-size has-visible-labels has-icon-color is-style-logos-only john-footer-social"><?php /* LinkedIn and Bluesky are hidden until the project's accounts exist.
-<!-- wp:social-link {"url":"#","service":"linkedin"} /-->
+<ul class="wp-block-social-links has-small-icon-size has-visible-labels has-icon-color is-style-logos-only john-footer-social"><!-- wp:social-link {"url":"<?php echo esc_url( JOHN_PROJECT_LINKEDIN_URL ); ?>","service":"linkedin"} /-->
 
-<!-- wp:social-link {"url":"#","service":"bluesky"} /-->
-*/ ?><!-- wp:social-link {"url":"<?php echo esc_url( $newsletter_url ); ?>","service":"mail","label":"Subscribe to the newsletter"} /--></ul>
+<!-- wp:social-link {"url":"<?php echo esc_url( JOHN_PROJECT_BLUESKY_URL ); ?>","service":"bluesky"} /-->
+
+<!-- wp:social-link {"url":"<?php echo esc_url( $newsletter_url ); ?>","service":"mail","label":"Subscribe to the newsletter"} /--></ul>
 <!-- /wp:social-links --></div>
 <!-- /wp:column -->
 
