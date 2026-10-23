@@ -6,8 +6,8 @@
  */
 
 $newsletter_url              = john_project_page_url( 'newsletter' ) ?: '#';
-$privacy_policy_url          = get_privacy_policy_url() ?: '#';
-$accessibility_statement_url = john_project_page_url( 'accessibility-statement' ) ?: '#';
+$privacy_policy_url          = home_url( '/privacy-policy/' );
+$accessibility_statement_url = home_url( '/accessibility/' );
 
 $explore_links = [];
 foreach ( [ 'about' => 'About', 'objectives' => 'Objectives', 'results' => 'Results', 'news-events' => 'News & Events', 'newsletter' => 'Newsletter' ] as $slug => $label ) {
@@ -76,7 +76,7 @@ foreach ( [ 'about' => 'About', 'objectives' => 'Objectives', 'results' => 'Resu
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"john-footer-legal","fontSize":"x-small"} -->
-<p class="john-footer-legal has-x-small-font-size"><a href="<?php echo esc_url( $privacy_policy_url ); ?>">Privacy policy</a> <a href="<?php echo esc_url( $accessibility_statement_url ); ?>">Accessibility statement</a> <a href="#">Cookie settings</a></p>
+<p class="john-footer-legal has-x-small-font-size"><a href="<?php echo esc_url( $privacy_policy_url ); ?>">Privacy policy</a> <a href="<?php echo esc_url( $accessibility_statement_url ); ?>">Accessibility statement</a></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

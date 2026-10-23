@@ -13,7 +13,9 @@ Icon set in WordPress, so WordPress's default icon never shows.
 
 ## Requirements
 
-WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed.
+WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed
+for the theme itself. Matomo analytics and the cookie banner come from the
+Complianz plugin, configured on the site, not from the theme.
 
 ## Site setup
 
@@ -26,8 +28,9 @@ WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed.
   called "Events" under News & Events. The `news-events` part is fixed in the
   theme and doesn't follow the page's slug.
 - Some links find pages by slug, so keep these slugs: `about` and `objectives`
-  (home page buttons), `accessibility-statement` (footer). Until a page exists,
-  its link points to `#`. The footer's privacy link uses Settings, Privacy.
+  (home page buttons). Until a page exists, its link points to `#`.
+- The footer links to `/privacy-policy/` and `/accessibility/`, so those pages
+  need exactly those slugs.
 - The LinkedIn and Bluesky addresses and the MailerLite sign-up endpoint are
   constants at the top of the page helpers in `functions.php`.
 - The newsletter sign-up form is the `[john_newsletter_form]` shortcode. It's
@@ -38,7 +41,9 @@ WordPress 7.0 or later, for the core Breadcrumbs block. No plugins are needed.
   `objectives`, `results`, `news-events` and `newsletter`, in that order, when
   they exist and are published.
 - "All news & events" links go to the parent page of the posts page (e.g.
-  "News & Events").
+  "News & Events"). The page with the slug `news-events` gets its own layout
+  (`templates/page-news-events.html`): its content as an intro, then news mixed
+  with upcoming events.
 - A page's "See also" card is chosen in the page editor's sidebar and shows
   the chosen page's excerpt, so give that page an excerpt.
 

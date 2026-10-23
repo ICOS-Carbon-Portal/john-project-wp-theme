@@ -27,9 +27,15 @@ Text Domain:  john-project
 	outline: none;
 }
 
+/* Teal and white keep the outline at 3:1 or more against every background used
+   (WCAG 1.4.11); the logo cyan was too light. */
 :where(.wp-site-blocks *:focus-visible) {
-	outline: 2px solid var(--wp--preset--color--info);
+	outline: 2px solid var(--wp--preset--color--primary);
 	outline-offset: 2px;
+}
+
+:where(.john-footer *:focus-visible) {
+	outline-color: var(--wp--preset--color--white);
 }
 
 /* Header and main navigation */
