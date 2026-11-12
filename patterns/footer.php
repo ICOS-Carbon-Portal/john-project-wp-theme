@@ -20,8 +20,8 @@ foreach ( [ 'about' => 'About', 'objectives' => 'Objectives', 'results' => 'Resu
 <!-- wp:group {"align":"full","className":"john-footer","style":{"spacing":{"padding":{"top":"4.5rem","bottom":"3rem"},"margin":{"top":"0"}},"elements":{"link":{"color":{"text":"var:preset|color|white"}}}},"backgroundColor":"primary","textColor":"white","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull john-footer has-white-color has-primary-background-color has-text-color has-background has-link-color" style="margin-top:0;padding-top:4.5rem;padding-bottom:3rem"><!-- wp:columns {"align":"wide","className":"john-footer-columns","style":{"spacing":{"blockGap":{"left":"3rem"}}}} -->
 <div class="wp-block-columns alignwide john-footer-columns"><!-- wp:column {"width":"29.7%"} -->
-<div class="wp-block-column" style="flex-basis:29.7%"><!-- wp:image {"width":"200px","sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full is-resized"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/john-logo-on-dark.svg' ) ); ?>" alt="JOHN" style="width:200px"/></figure>
+<div class="wp-block-column" style="flex-basis:29.7%"><!-- wp:image {"width":"200px","sizeSlug":"full","linkDestination":"custom"} -->
+<figure class="wp-block-image size-full is-resized"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/images/john-logo-on-dark.svg' ) ); ?>" alt="JOHN Project home" style="width:200px"/></a></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"fontSize":"small"} -->
